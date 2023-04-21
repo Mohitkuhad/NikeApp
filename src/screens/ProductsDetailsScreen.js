@@ -11,6 +11,7 @@ import {
 import products from "../data/products";
 
 const ProductsDetailsScreen = () => {
+
   const product = products[0];
   const { width } = useWindowDimensions();
 
