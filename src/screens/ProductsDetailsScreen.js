@@ -7,19 +7,22 @@ import {
   Text,
   ScrollView,
   Pressable,
+  Vibration,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import { cartSlice } from "../store/cartSlice";
 
-const ProductsDetailsScreen = () => {
+const ProductsDetailsScreen = ({ navigation }) => {
   const product = useSelector((state) => state.products.selectedProduct);
   const dispatch = useDispatch();
   const { width } = useWindowDimensions();
 
   const addToCart = () => {
     dispatch(cartSlice.actions.addCartItem({ product }));
+    navigation.goBack();
   };
 
+  const vibrationPattern = "vibrate 1s";
   return (
     <View>
       <ScrollView>

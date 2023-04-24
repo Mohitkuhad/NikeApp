@@ -3,15 +3,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import ProductsScreen from "./screens/ProductsScreen";
 import ProductsDetailsScreen from "./screens/ProductsDetailsScreen";
 import ShoppingCart from "./screens/ShoppingCart";
-import { Pressable, Text } from "react-native";
-import { FontAwesome5 } from "@expo/vector-icons";
-import { useSelector } from "react-redux";
-import { selectNumberOfItems } from "./store/cartSlice";
+import LoginScreen from "./screens/LoginScreen";
+import JoinUs from "./screens/JoinUs";
+import { Button } from "react-native";
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const numberOfItems = useSelector(selectNumberOfItems);
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -19,20 +17,29 @@ const Navigation = () => {
       >
         <Stack.Screen
           name="Nike"
-          component={ProductsScreen}
+          options={{ headerShown: false }}
+          component={LoginScreen}
+        />
+
+        <Stack.Screen
+          name="accounts.nikeClone.com"
+          component={JoinUs}
           options={({ navigation }) => ({
-            headerRight: () => (
-              <Pressable
-                onPress={() => navigation.navigate("Cart")}
+            headerLeft: () => (
+              <Button
+                onPress={() => navigation.navigate("Nike")}
                 style={{ flexDirection: "row" }}
-              >
-                <FontAwesome5 name="shopping-cart" size={18} color="gray" />
-                <Text style={{ marginLeft: 5, fontWeight: "500" }}>
-                  {numberOfItems}
-                </Text>
-              </Pressable>
+                title="Cancel"
+              />
             ),
+            presentation: "modal",
           })}
+        />
+
+        <Stack.Screen
+          name="Shop"
+          component={ProductsScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="Details"
